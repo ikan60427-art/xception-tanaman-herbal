@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Klasifikasi Tanaman Herbal</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='css/style.css') }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="background-circle circle1"></div>
+
+<div class="background-circle circle2"></div>
+
+<div class="container">
+
+<div class="card">
+
+<h1>🌿 Klasifikasi Tanaman Herbal</h1>
+
+<p class="subtitle">
+
+Identifikasi Jahe, Kencur, Kunyit, dan Lengkuas menggunakan Deep Learning Xception.
+
+</p>
+
+<form action="/predict" method="POST" enctype="multipart/form-data">
+
+<label class="upload-box">
+
+<input
+type="file"
+name="image"
+accept="image/*"
+required
+id="imageInput"
+onchange="previewImage(event)"
+>
+
+<div id="uploadContent">
+
+<div class="upload-icon">
+
+📷
+
+</div>
+
+<h3>Pilih Gambar</h3>
+
+<p>Klik untuk memilih gambar tanaman herbal</p>
+
+</div>
+
+<img id="preview">
+
+</label>
+
+<button>
+
+🔍 Analisis Gambar
+
+</button>
+
+</form>
+
+{% if error %}
+
+<p class="error">
+
+{{ error }}
+
+</p>
+
+{% endif %}
+
+{% if label %}
+
+<div class="result-card">
+
+<h2>Hasil Prediksi</h2>
+
+<img src="{{ image }}" class="result-image">
+
+<div class="badge">
+
+🌿 {{ label }}
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:{{ confidence }}%">
+</div>
+
+</div>
+
+<p class="confidence">
+
+Confidence
+
+<b>{{ confidence }}%</b>
+
+</p>
+
+<div class="info">
+
+<div>
+
+<h4>Model</h4>
+
+<p>Xception</p>
+
+</div>
+
+<div>
+
+<h4>Kelas</h4>
+
+<p>4 Tanaman</p>
+
+</div>
+
+<div>
+
+<h4>Input</h4>
+
+<p>299×299</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+const img=document.getElementById("preview");
+
+const upload=document.getElementById("uploadContent");
+
+img.src=URL.createObjectURL(event.target.files[0]);
+
+img.style.display="block";
+
+upload.style.display="none";
+
+}
+
+</script>
+
+</body>
+
+</html>
