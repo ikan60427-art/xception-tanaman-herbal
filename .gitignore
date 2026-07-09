@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+dataset_asli/
+dataset/
+static/uploads/
+*.pyc
